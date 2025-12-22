@@ -1,0 +1,20 @@
+{
+  "name": "app-fifa-player-manager",
+  "version": "1.0.0",
+  "description": "x-academy project",
+  "homepage": "https://github.com/AlexRubenPumari/app-fifa-player-manager#readme",
+  "bugs": {
+    "url": "https://github.com/AlexRubenPumari/app-fifa-player-manager/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexRubenPumari/app-fifa-player-manager.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  }
+}
