@@ -1,0 +1,15 @@
+{
+  "name": "@fifa-player-manager/domain",
+  "version": "1.0.0",
+  "description": "fifa player manager domain module",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
