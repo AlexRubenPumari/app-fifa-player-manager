@@ -1,4 +1,4 @@
-import { validatePayload, type CreatePlayerPayload } from "../request-model"
+import { validatePayload, type CreatePlayerPayload } from "../request-model/create-player"
 import type { PlayerRepository } from "../repositories"
 
 interface CreatePlayerDeps {
@@ -10,5 +10,5 @@ export async function createPlayer (
 ) {
   if(!validatePayload({ player })) throw new Error("Payload is invalid")
 
-  return await playerRepository.save(player) 
+  return await playerRepository.save(player)
 }

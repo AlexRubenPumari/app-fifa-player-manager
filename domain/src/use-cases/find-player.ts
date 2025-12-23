@@ -14,7 +14,7 @@ export async function findPlayer(
 ) {
   const player = await playerRepository.findOne(options)
 
-  if (!player) throw new Error("Player not found");
+  if (!player) throw new Error("Player not found")
 
   return player
 }
