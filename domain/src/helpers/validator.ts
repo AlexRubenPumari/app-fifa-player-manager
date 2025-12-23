@@ -1,0 +1,1 @@
+export type Validator<DataType> = (data: DataType) => boolean
