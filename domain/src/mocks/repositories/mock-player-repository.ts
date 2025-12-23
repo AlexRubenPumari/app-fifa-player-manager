@@ -22,6 +22,12 @@ export class MockPlayerRepository implements PlayerRepository {
   }
 
   async save(player: New<Player>) {
+    const playerFound = this.players.find(({ fullName }) => {
+      return fullName === player.fullName
+    })
+
+    if (playerFound) throw new Error("Player already exists")
+
     const newId: number = this.players.length + 1
     const newPlayer: Player = { ...player, id: newId, }
 
