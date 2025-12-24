@@ -1,5 +1,5 @@
 import express from "express"
-import { MockPlayerRepository, findPlayer, listPlayers } from "../../../domain/dist"
+import { MockPlayerRepository, findPlayer, listPlayers } from "../../../domain/dist/index.js"
 const app = express()
 
 const PORT: number = 3000

@@ -4,10 +4,10 @@
   "description": "fifa player manager domain module",
   "license": "ISC",
   "author": "",
-  "type": "module",
+  "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "build": "tsc"
   },
   "devDependencies": {
     "typescript": "^5.9.3",
