@@ -16,6 +16,9 @@
     // "types": ["node"],
     // and npm install -D @types/node
 
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
     // Other Outputs
     "sourceMap": true,
     "declaration": true,
@@ -36,7 +39,7 @@
     // Recommended Options
     "strict": true,
     "jsx": "react-jsx",
-    "verbatimModuleSyntax": true,
+    "verbatimModuleSyntax": false,
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
