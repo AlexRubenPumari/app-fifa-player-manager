@@ -15,6 +15,6 @@ const UpdatablePlayerSchema = z.object({
   nationality: z.string().min(1).optional(),
 }).refine(hasUpdatableField)
 
-export const validatePayload: Validator<EditPlayerPayload> = ({ player }) => {
+export const validateEditPlayerPayload: Validator<EditPlayerPayload> = ({ player }) => {
   return UpdatablePlayerSchema.safeParse(player).success
 }

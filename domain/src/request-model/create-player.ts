@@ -11,6 +11,6 @@ const PlayerSchema = z.object({
   nationality: z.string().optional(),
 })
 
-export const validatePayload: Validator<CreatePlayerPayload> = ({ player }) => {
+export const validateCreatePlayerPayload: Validator<CreatePlayerPayload> = ({ player }) => {
   return PlayerSchema.safeParse(player).success
 }
