@@ -7,7 +7,7 @@ describe("list-players", () => {
     const playerRepository = new MockPlayerRepository()
     const result = await listPlayers({ playerRepository }, { options: { page: 1, pageSize: 10 } })
 
-    expect(result).toEqual([])
+    expect(result.value?.players).toEqual([])
   })
 
   test("should return players list with pagination options", async () => {
@@ -17,6 +17,6 @@ describe("list-players", () => {
     ])
     const result = await listPlayers({ playerRepository }, { options: { page: 1, pageSize: 1 } })
 
-    expect(result.length).toBe(2)
+    expect(result.value?.players.length).toBe(2)
   })
 })
