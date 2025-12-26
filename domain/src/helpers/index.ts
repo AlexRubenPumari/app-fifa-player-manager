@@ -1,4 +1,3 @@
-export * from "./at-least-one"
 export * from "./entity"
 export * from "./new-entity"
 export * from "./repository"
