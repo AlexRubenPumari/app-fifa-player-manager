@@ -8,16 +8,17 @@ describe("find-player", () => {
   ])
 
   test("should return player if exists", async () => {
-    const player = await findPlayer({ playerRepository }, { options: { id: 1 } })
+    const result = await findPlayer({ playerRepository }, { options: { id: 1 } })
 
-    expect(player).toEqual({
+    expect(result.value?.player).toEqual({
       id: 1,
       fullName: "Lionel Andrés Messi Cuccittini",
     })
   })
 
-  test("should throw error if player does not exist", async () => {
-    await expect(findPlayer({ playerRepository }, { options: { id: 99 } }))
-      .rejects.toThrow("Player not found")
+  test("should return an error if player does not exist", async () => {
+    const result = await findPlayer({ playerRepository }, { options: { id: 99 } })
+
+    expect(result).toEqual({ success: false, error: "Player not found" })
   })
 })

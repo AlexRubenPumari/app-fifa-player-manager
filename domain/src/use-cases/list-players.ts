@@ -14,11 +14,11 @@ type ListPlayersResult = Result<{ players: Player[] }, never>
 
 export async function listPlayers (
   { playerRepository }: ListPlayersDeps, { options }: ListPlayersPayload
-) {
+): Promise<ListPlayersResult> {
   const players = await playerRepository.findMany(options)
 
   return {
     success: true,
     value: { players },
-  } satisfies ListPlayersResult as ListPlayersResult
+  }
 }
