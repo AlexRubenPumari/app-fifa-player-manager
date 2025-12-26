@@ -3,7 +3,18 @@
   "compilerOptions": {
     "rootDir": "./src",
     "outDir": "./dist",
+    "baseUrl": ".",
+    "paths": {
+      "@domain": [
+        "../../domain/dist/index"
+      ]
+    }
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["src/**/*.test.ts", "node_modules"],
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/**/*.test.ts",
+    "node_modules"
+  ],
 }

@@ -5,7 +5,10 @@
   "main": "app.js",
   "type": "commonjs",
   "scripts": {
-    "test": "test"
+    "test": "vitest --run",
+    "build": "tsc",
+    "start:dev": "node dist/app.js",
+    "start:prod": "NODE_ENV=production node dist/app.js"
   },
   "author": "",
   "license": "ISC",
