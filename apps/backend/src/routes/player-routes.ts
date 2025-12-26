@@ -1,4 +1,4 @@
-import { MockPlayerRepository, Player, findPlayer, listPlayers } from "@domain"
+import { MockPlayerRepository, Player, findPlayer, listPlayers } from "@fifa-player-manager/domain"
 import express, { Response } from "express"
 import { ApiResponse } from "../types"
 

@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fifa-player-manager/domain": "file:../../domain",
     "express": "^5.2.1"
   },
   "devDependencies": {
