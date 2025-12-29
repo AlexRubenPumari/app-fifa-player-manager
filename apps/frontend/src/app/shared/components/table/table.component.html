@@ -1,0 +1,48 @@
+<table
+  class="
+    w-full border-collapse
+    bg-linear-to-b from-slate-800/95 to-slate-900/95
+    shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04)]"
+>
+  <thead>
+    <tr>
+      <th
+        class="
+          bg-linear-to-b from-slate-600 to-slate-700
+          p-2.5 text-sm font-bold text-slate-400
+          border-b-2 border-orange-500"
+        *ngFor="let column of columns"
+      >
+        {{ column.label }}
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr
+      class="transition-colors hover:bg-orange-500/10"
+      *ngFor="let row of data"
+    >
+      <td
+        class="p-2 text-center text-slate-300 border-b border-slate-700"
+        *ngFor="let column of columns"
+      >
+      {{ row[column.key] }}
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+    <!-- FILA SELECCIONADA
+    <tr
+      class="transition-colors
+             bg-gradient-to-r from-orange-500/40 to-orange-500/5
+             shadow-[inset_0_0_0_1px_rgba(255,138,0,0.4)]">
+      <td class="p-2 text-center text-slate-200 border-b border-slate-700">10</td>
+      <td class="p-2 text-center text-slate-200 border-b border-slate-700">Ordaz</td>
+      <td class="p-2 text-center text-slate-200 border-b border-slate-700">AMF</td>
+      <td class="p-2 text-center text-slate-200 border-b border-slate-700">29</td>
+      <td class="p-2 text-center text-slate-200 border-b border-slate-700">86</td>
+      <td class="p-2 text-center text-slate-200 border-b border-slate-700">B</td>
+    </tr> -->
