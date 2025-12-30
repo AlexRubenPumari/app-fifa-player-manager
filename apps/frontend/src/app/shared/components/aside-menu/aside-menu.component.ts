@@ -1,9 +1,12 @@
-import { Component } from "@angular/core"
+import { Component, Input } from "@angular/core"
+import { CommonModule } from "@angular/common"
 
 @Component({
   selector: "app-aside-menu",
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: "./aside-menu.component.html",
 })
-export class AsideMenu {}
+export class AsideMenu {
+  @Input() isOpen: boolean = false
+}
