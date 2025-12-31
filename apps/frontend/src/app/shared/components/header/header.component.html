@@ -1,11 +1,30 @@
 <header class="
-  flex px-6 py-5
+  flex items-center gap-8 px-6 py-5
   bg-linear-to-r from-slate-900 to-slate-800
   border-b-2 border-orange-500
-  uppercase tracking-widest
+  text-orange-400 uppercase tracking-widest
   shadow-inner
   select-none"
 >
-  <button (click)="onMenuButtonClick()" class="bg-amber-200 cursor-pointer">Btn</button>
-  <div class="text-orange-400 text-2xl font-bold">Jugadores FIFA</div>
+  <button
+    (click)="onMenuButtonClick()"
+    class="
+      cursor-pointer select-none 
+      hover:text-orange-500 transition-colors duration-300
+      lg:hidden"
+  >
+    <svg
+      class="size-7"
+      viewBox="0 0 12 12"
+      enable-background="new 0 0 12 12"
+      xml:space="preserve"
+    >
+      <g>
+        <rect fill="currentColor" height="1" width="11" x="0.5" y="2.5" />
+        <rect fill="currentColor" height="1" width="11" x="0.5" y="8.5" />
+        <rect fill="currentColor" height="1" width="11" x="0.5" y="5.5" />
+      </g>
+    </svg>
+  </button>
+  <div class="text-2xl font-bold">Jugadores FIFA</div>
 </header>
