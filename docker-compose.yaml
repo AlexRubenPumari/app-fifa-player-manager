@@ -1,0 +1,31 @@
+services:
+  db:
+    image: mysql:8.4
+    container_name: fifa-player-manager-db
+    ports:
+      - "${HOST_DB_PORT}:3306"
+    env_file: .env
+  web:
+    image: fifa-player-manager-web:dev
+    build:
+      context: ./apps/web
+      dockerfile: web.dockerfile
+    container_name: fifa-player-manager-web
+    ports:
+      - "${HOST_WEB_PORT}:4200"
+    env_file: .env
+    volumes:
+      - ./apps/web:/app
+      - /app/node_modules
+  api:
+    image: fifa-player-manager-api:dev
+    build:
+      context: ./apps/api
+      dockerfile: api.dockerfile
+    container_name: fifa-player-manager-api
+    ports:
+      - "${HOST_API_PORT}:3000"
+    env_file: .env
+    volumes:
+      - ./apps/api:/app
+      - /app/node_modules
