@@ -1,0 +1,16 @@
+export type PlayerPosition =
+  | "GK"
+  | "RB"
+  | "RWB"
+  | "CB"
+  | "LB"
+  | "LWB"
+  | "CDM"
+  | "CM"
+  | "CAM"
+  | "RM"
+  | "LM"
+  | "RW"
+  | "LW"
+  | "CF"
+  | "ST";
