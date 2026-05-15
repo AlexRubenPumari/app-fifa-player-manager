@@ -1,0 +1,1 @@
+export type SearchType = "exact" | "partial" | "contains" | "starts_with";
