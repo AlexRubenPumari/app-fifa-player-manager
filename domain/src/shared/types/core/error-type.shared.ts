@@ -1,4 +1,4 @@
 export type ErrorType =
   | "DOMAIN"
-  | "NOT_FOUND"
-  | "INVALID_REQUEST";
+  | "INVALID_REQUEST"
+  | "PLAYER_NOT_FOUND";
