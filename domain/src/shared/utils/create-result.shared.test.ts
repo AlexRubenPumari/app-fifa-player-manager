@@ -1,12 +1,14 @@
 import { describe, expect, test } from "vitest";
 import { createResult } from "./create-result.shared";
-import { ApplicationError } from "../../errors";
+import { DomainError } from "../../errors";
 
-class TestError extends ApplicationError {}
+class TestError extends DomainError {
+  readonly type = "DOMAIN";
+}
 
 describe("create-result", () => {
   describe("ok", () => {
-    test("should return a success object with ok=true and the value", () => {
+    test("should return a success object with 'ok=true' and the value", () => {
       const value = { id: 1, name: "john" };
 
       const response = createResult.ok(value);
@@ -26,7 +28,7 @@ describe("create-result", () => {
   });
 
   describe("error", () => {
-    test("should return a failure object with ok=false and the error", () => {
+    test("should return a failure object with 'ok=false' and the error", () => {
       const error = new TestError("something went wrong");
 
       const response = createResult.error(error);
@@ -37,7 +39,7 @@ describe("create-result", () => {
       });
     });
 
-    test("should preserve the error instance", () => {
+    test("should preserve the error instance and message", () => {
       const error = new TestError("test error");
 
       const response = createResult.error(error);

@@ -30,13 +30,13 @@ describe("create-use-case", () => {
       handler,
     });
 
-    const result = await useCase.execute({} as never, { name: "John" });
+    const result = await useCase.execute({} as never, { name: "john" });
 
     expect(result).toEqual({
       ok: true,
       value: "success",
     });
-    expect(handler).toHaveBeenCalledWith({} as never, { name: "John" });
+    expect(handler).toHaveBeenCalledWith({} as never, { name: "john" });
   });
 
   test("should return error when request validation fails", async () => {
