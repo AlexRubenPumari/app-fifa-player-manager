@@ -5,4 +5,5 @@ export const schema = {
   number: z.number,
   boolean: z.boolean,
   object: z.object,
+  enum: z.enum,
 };

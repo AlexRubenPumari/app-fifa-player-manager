@@ -1,5 +1,5 @@
 import { Result, Request, RequestShape } from "./index";
-import { DomainError, InvalidRequestError } from "../../../errors";
+import { DomainError, InvalidRequestError } from "../../errors";
 
 export type UseCaseError<
   TError extends DomainError = DomainError

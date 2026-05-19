@@ -1,0 +1,7 @@
+export type ErrorType =
+  | "DOMAIN"
+  | "INVALID_REQUEST"
+  | "PLAYER_NOT_FOUND"
+  | "INVALID_CREDENTIALS"
+  | "USER_NOT_FOUND"
+  | "SESSION_NOT_FOUND";

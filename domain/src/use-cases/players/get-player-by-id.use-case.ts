@@ -1,7 +1,7 @@
 import { PlayerNotFoundError } from "../../errors";
 import { PlayerRepository } from "../../repositories";
 import { Player } from "../../entities";
-import { createUseCase, createResult, schema } from "../../shared/utils";
+import { createUseCase, createResult, schema } from "../../shared";
 
 interface GetPlayerByIdDependencies {
   playerRepository: PlayerRepository;

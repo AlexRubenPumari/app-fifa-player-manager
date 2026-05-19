@@ -1,5 +1,5 @@
-import { Result, UseCase, UseCaseError, Request, RequestShape } from "../types";
-import { DomainError } from "../../errors";
+import { Result, UseCase, UseCaseError, Request, RequestShape } from "../../index";
+import { DomainError } from "../../../errors";
 import { validateRequest } from "../utils";
 
 export function createUseCase<

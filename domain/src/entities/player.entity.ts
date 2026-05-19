@@ -1,4 +1,4 @@
-import { Entity, ClubPosition, PlayerPosition } from "../shared/types";
+import { Entity, ClubPosition, PlayerPosition } from "../shared";
 
 export interface Player extends Entity {
   longName: string;

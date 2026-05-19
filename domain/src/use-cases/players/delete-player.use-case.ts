@@ -1,4 +1,4 @@
-import { createResult, createUseCase, schema } from "../../shared/utils";
+import { createResult, createUseCase, schema } from "../../shared";
 import { PlayerRepository } from "../../repositories";
 import { PlayerNotFoundError } from "../../errors";
 
@@ -22,6 +22,6 @@ export const deletePlayerUseCase = createUseCase<
 
     await playerRepository.delete({ id });
 
-    return createResult.ok(undefined);
+    return createResult.ok();
   }
 });

@@ -1,4 +1,4 @@
-import { Player } from "../entities/index";
-import { Repository } from "../shared/index";
+import { Player } from "../entities";
+import { Repository } from "../shared";
 
 export interface PlayerRepository extends Repository<Player> {};

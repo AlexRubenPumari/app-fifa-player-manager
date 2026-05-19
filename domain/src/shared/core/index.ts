@@ -5,5 +5,6 @@ export * from "./repository.shared";
 export * from "./search-type.shared";
 export * from "./use-case.shared";
 export * from "./result.shared";
-export * from "./schema.shared";
+export * from "./request.shared";
 export * from "./error-type.shared";
+export * from "./utils";
