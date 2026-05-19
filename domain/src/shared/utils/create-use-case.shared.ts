@@ -1,3 +1,4 @@
+import { z } from "zod";
 import { Result, UseCase, UseCaseError, Request, RequestShape } from "../types";
 import { DomainError } from "../../errors";
 import { validateRequest } from "../utils";
@@ -5,31 +6,33 @@ import { validateRequest } from "../utils";
 export function createUseCase<
   TDependencies,
   TResponse,
-  TError extends DomainError = never,
-  TShape extends RequestShape = RequestShape,
->(options: {
-  isAuthRequired: boolean;
+  TError extends DomainError,
+>() {
+  return function <
+    TShape extends RequestShape
+  >(options: {
+    isAuthRequired: boolean;
 
-  requestShape: TShape;
+    requestShape: TShape;
 
-  handler: (
-    dependencies: TDependencies,
-    request: Request<TShape>,
-  ) => Promise<Result<TResponse, TError>>;
-}): UseCase<TDependencies, TResponse, TError, TShape> {
-  return {
-    isAuthRequired: options.isAuthRequired,
-
-    async execute(
-      dependencies: TDependencies,
+    handler: (
+      deps: TDependencies,
       request: Request<TShape>,
-    ): Promise<Result<TResponse, UseCaseError<TError>>> {
-      const validationResult = validateRequest(options.requestShape, request);
+    ) => Promise<Result<TResponse, TError>>;
+  }) {
+    return {
+      isAuthRequired: options.isAuthRequired,
 
-      if (!validationResult.ok) return validationResult;
+      async execute(
+        dependencies: TDependencies,
+        request: Request<TShape>,
+      ): Promise<Result<TResponse, UseCaseError<TError>>> {
+        const validationResult = validateRequest(options.requestShape, request);
 
-      return options.handler(dependencies, validationResult.value);
-    },
+        if (!validationResult.ok) return validationResult;
+
+        return options.handler(dependencies, validationResult.value);
+      },
+    };
   };
 }
-
