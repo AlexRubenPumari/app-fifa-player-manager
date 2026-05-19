@@ -1,4 +1,3 @@
-import { z } from "zod";
 import { Result, UseCase, UseCaseError, Request, RequestShape } from "../types";
 import { DomainError } from "../../errors";
 import { validateRequest } from "../utils";
@@ -19,7 +18,7 @@ export function createUseCase<
       deps: TDependencies,
       request: Request<TShape>,
     ) => Promise<Result<TResponse, TError>>;
-  }) {
+  }): UseCase<TDependencies, TResponse, TError, TShape> {
     return {
       isAuthRequired: options.isAuthRequired,
 

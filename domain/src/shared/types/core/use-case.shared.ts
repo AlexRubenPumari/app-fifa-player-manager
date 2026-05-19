@@ -1,17 +1,19 @@
-import { Result, Schema, SchemaInput } from "./index";
-import { DomainError, InvalidRequestError } from "../../../errors/index";
+import { Result, Request, RequestShape } from "./index";
+import { DomainError, InvalidRequestError } from "../../../errors";
 
-export type UseCaseError<TError extends DomainError = DomainError> = TError | InvalidRequestError;
+export type UseCaseError<
+  TError extends DomainError = DomainError
+> = TError | InvalidRequestError;
 
 export interface UseCase<
   TDependencies,
-  TRequestSchema extends Schema,
   TResponse,
-  TError extends DomainError = DomainError
+  TError extends DomainError,
+  TShape extends RequestShape = RequestShape,
 > {
   isAuthRequired: boolean;
-  execute: (
+  execute(
     dependencies: TDependencies,
-    request: SchemaInput<TRequestSchema>
-  ) => Promise<Result<TResponse, UseCaseError<TError>>>;
+    request: Request<TShape>
+  ): Promise<Result<TResponse, UseCaseError<TError>>>;
 };
