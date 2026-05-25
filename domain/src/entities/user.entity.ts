@@ -1,8 +1,7 @@
-import { Entity } from "../shared";
+import { Email, Entity } from "../shared";
 
 export interface User extends Entity {
-  email: string;
+  username: string;
+  email: Email;
   passwordHash: string;
-  firstName: string;
-  lastName: string;
 }
