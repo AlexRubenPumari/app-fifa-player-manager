@@ -1,4 +1,4 @@
-import { ErrorType } from "../shared/types";
+import { ErrorType } from "../shared/core";
 
 export abstract class DomainError extends Error {
   abstract readonly type: ErrorType;
