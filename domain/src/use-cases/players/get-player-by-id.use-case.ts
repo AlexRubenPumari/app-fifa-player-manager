@@ -7,19 +7,22 @@ interface GetPlayerByIdDependencies {
   playerRepository: PlayerRepository;
 }
 
-type GetPlayerByIdResponse = Player;
+interface GetPlayerByIdRequest {
+  id: number;
+}
 
-const getPlayerByIdUseCase = createUseCase<
+export const getPlayerByIdUseCase = createUseCase<
   GetPlayerByIdDependencies,
-  GetPlayerByIdResponse,
+  GetPlayerByIdRequest,
+  Player,
   PlayerNotFoundError
->()({
+>({
   isAuthRequired: true,
-  requestShape: {
+  requestSchema: {
     id: schema.number(),
   },
-  handler: async ({ playerRepository }, request) => {
-    const player = await playerRepository.findOne({ id: request.id });
+  handler: async (dependencies, request) => {
+    const player = await dependencies.playerRepository.findOne({ id: request.id });
 
     if (!player) return createResult.error(new PlayerNotFoundError());
 

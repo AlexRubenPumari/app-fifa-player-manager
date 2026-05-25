@@ -1,4 +1,4 @@
-import { Entity } from "../shared/core/entity.shared";
+import { Entity } from "../shared";
 
 export interface User extends Entity {
   email: string;

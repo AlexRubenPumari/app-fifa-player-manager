@@ -1,7 +1,6 @@
-import { schema } from "../core";
 import { PlayerPosition, playerPositions } from "./index";
 
-const clubPositions = [
+export const clubPositions = [
   ...playerPositions,
   "LCB",
   "RCB",
@@ -18,7 +17,5 @@ const clubPositions = [
   "SUB",
   "RES",
 ] as const;
-
-export const clubPositionEnum = schema.enum(clubPositions);
 
 export type ClubPosition = PlayerPosition | typeof clubPositions[number];

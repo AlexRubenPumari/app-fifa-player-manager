@@ -1,37 +1,34 @@
-import { Result, UseCase, UseCaseError, Request, RequestShape } from "../../index";
+import { Result, UseCase, UseCaseError } from "../../index";
 import { DomainError } from "../../../errors";
 import { validateRequest } from "../utils";
+import { Schema } from "../types";
+
+interface UseCaseOptions<TDependencies, TRequest, TResponse, TError extends DomainError> {
+  isAuthRequired: boolean;
+  requestSchema: Schema<TRequest>;
+  handler: (
+    dependencies: TDependencies, request: TRequest
+  ) => Promise<Result<TResponse, TError>>;
+}
 
 export function createUseCase<
   TDependencies,
+  TRequest,
   TResponse,
   TError extends DomainError,
->() {
-  return function <
-    TShape extends RequestShape
-  >(options: {
-    isAuthRequired: boolean;
+>(
+  options: UseCaseOptions<TDependencies, TRequest, TResponse, TError>
+): UseCase<TDependencies, TRequest, TResponse, TError> {
+  return {
+    isAuthRequired: options.isAuthRequired,
+    execute: async (
+      dependencies: TDependencies, request: TRequest
+    ): Promise<Result<TResponse, UseCaseError<TError>>> => {
+      const validationResult = validateRequest(options.requestSchema, request);
 
-    requestShape: TShape;
+      if (!validationResult.ok) return validationResult;
 
-    handler: (
-      deps: TDependencies,
-      request: Request<TShape>,
-    ) => Promise<Result<TResponse, TError>>;
-  }): UseCase<TDependencies, TResponse, TError, TShape> {
-    return {
-      isAuthRequired: options.isAuthRequired,
-
-      async execute(
-        dependencies: TDependencies,
-        request: Request<TShape>,
-      ): Promise<Result<TResponse, UseCaseError<TError>>> {
-        const validationResult = validateRequest(options.requestShape, request);
-
-        if (!validationResult.ok) return validationResult;
-
-        return options.handler(dependencies, validationResult.value);
-      },
-    };
-  };
+      return options.handler(dependencies, validationResult.value);
+    }
+  }
 }

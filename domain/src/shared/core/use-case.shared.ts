@@ -1,4 +1,4 @@
-import { Result, Request, RequestShape } from "./index";
+import { Result } from "../core";
 import { DomainError, InvalidRequestError } from "../../errors";
 
 export type UseCaseError<
@@ -7,13 +7,13 @@ export type UseCaseError<
 
 export interface UseCase<
   TDependencies,
+  TRequest,
   TResponse,
   TError extends DomainError,
-  TShape extends RequestShape = RequestShape,
 > {
   isAuthRequired: boolean;
   execute(
     dependencies: TDependencies,
-    request: Request<TShape>
+    request: TRequest
   ): Promise<Result<TResponse, UseCaseError<TError>>>;
 };

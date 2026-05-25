@@ -6,15 +6,18 @@ interface DeletePlayerDependencies {
   playerRepository: PlayerRepository;
 }
 
-type DeletePlayerResponse = void;
+interface DeletePlayerRequest {
+  id: number;
+}
 
 export const deletePlayerUseCase = createUseCase<
   DeletePlayerDependencies,
-  DeletePlayerResponse,
+  DeletePlayerRequest,
+  void,
   PlayerNotFoundError
->()({
+>({
   isAuthRequired: true,
-  requestShape: { id: schema.number().int().positive("id must be a positive integer") },
+  requestSchema: { id: schema.number().int().positive("id must be a positive integer") },
   handler: async ({ playerRepository }, { id }) => {
     const existingPlayer = await playerRepository.findOne({ id });
 

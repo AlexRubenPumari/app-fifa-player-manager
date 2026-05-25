@@ -1,5 +1,3 @@
-import { schema } from "../core";
-
 export const playerPositions = [
   "GK",
   "RB",
@@ -17,7 +15,5 @@ export const playerPositions = [
   "CF",
   "ST",
 ] as const;
-
-export const playerPositionEnum = schema.enum(playerPositions);
 
 export type PlayerPosition = typeof playerPositions[number];

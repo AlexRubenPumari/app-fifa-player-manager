@@ -1,8 +1,4 @@
-import { Entity, FilterCondition } from "./index";
-
-export type OrderByType<TEntity> = {
-  [Key in keyof TEntity]?: "asc" | "desc";
-};
+import { Entity, FilterCondition, OrderBy } from "../index";
 
 export type WhereClause<TEntity extends Entity> = {
   [Key in keyof TEntity]?: TEntity[Key] | FilterCondition<TEntity[Key]>;
@@ -15,7 +11,7 @@ export type FindManyDTO<TEntity extends Entity> = {
   where?: WhereClause<TEntity>;
   take: number;
   skip: number;
-  orderBy?: OrderByType<TEntity> | OrderByType<TEntity>[];
+  orderBy?: OrderBy<TEntity> | OrderBy<TEntity>[];
 };
 
 export interface FindManyResult<TEntity> {
