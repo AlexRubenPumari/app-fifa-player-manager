@@ -14,16 +14,18 @@ export type FindManyDTO<TEntity extends Entity> = {
   orderBy?: OrderBy<TEntity> | OrderBy<TEntity>[];
 };
 
+export interface FindOneDTO<TEntity extends Entity> {
+  where: WhereClause<TEntity>;
+}
+
 export interface FindManyResult<TEntity> {
   data: TEntity[];
   total: number;
 }
 
-export interface FindOneDTO<TEntity extends Entity> { id: TEntity["id"]; }
-
 export interface DeleteDTO<TEntity extends Entity> { id: TEntity["id"]; }
 
-export interface SaveDTO<TEntity extends Entity> { data: Omit<TEntity, "id">; }
+export type SaveDTO<TEntity extends Entity> = Omit<TEntity, "id">;
 
 export interface UpdateDTO<TEntity extends Entity> {
   id: TEntity["id"];

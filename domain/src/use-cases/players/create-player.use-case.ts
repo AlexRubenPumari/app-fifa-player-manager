@@ -37,7 +37,7 @@ export const createPlayerUseCase = createUseCase<
     nationality: schema.string().min(1, "nationality is required"),
   },
   handler: async ({ playerRepository }, data) => {
-    const player = await playerRepository.save({ data });
+    const player = await playerRepository.save(data);
 
     return createResult.ok(player);
   }
