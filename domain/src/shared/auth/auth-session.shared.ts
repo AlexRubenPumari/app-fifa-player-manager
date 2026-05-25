@@ -1,4 +1,4 @@
-import { SafeUser } from "../../safe-user.shared";
+import { SafeUser } from "../users";
 
 export interface AuthSession {
   accessToken: string;
