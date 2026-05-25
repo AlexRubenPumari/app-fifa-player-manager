@@ -5,7 +5,7 @@ import { Schema } from "../types";
 
 interface UseCaseOptions<TDependencies, TRequest, TResponse, TError extends DomainError> {
   isAuthRequired: boolean;
-  requestSchema: Schema<TRequest>;
+  requestSchema?: Schema<TRequest>;
   handler: (
     dependencies: TDependencies, request: TRequest
   ) => Promise<Result<TResponse, TError>>;
