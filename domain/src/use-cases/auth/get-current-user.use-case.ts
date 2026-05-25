@@ -1,29 +1,43 @@
-import { z as schema } from "zod";
-import { createResult, createUseCase } from "../../shared/core/utils";
+import { createResult, createUseCase, schema } from "../../shared/core/utils";
 import { SafeUser } from "../../shared/users";
-import { AuthService } from "../../services";
-import { SessionNotFoundError } from "../../errors";
+import { InvalidCredentialsError, UserNotFoundError } from "../../errors";
+import { TokenService } from "../../services";
+import { UserRepository } from "../../repositories";
 
 interface GetCurrentUserDependencies {
-  authService: AuthService;
+  tokenService: TokenService;
+  userRepository: UserRepository;
 }
 
-type GetCurrentUserResponse = SafeUser;
+type GetCurrentUserRequest = {
+  accessToken: string;
+};
 
-type GetCurrentUserRequest = void;
+type GetCurrentUserResponse = SafeUser;
 
 export const getCurrentUser = createUseCase<
   GetCurrentUserDependencies,
   GetCurrentUserRequest,
   GetCurrentUserResponse,
-  SessionNotFoundError
+  InvalidCredentialsError | UserNotFoundError
 >({
   isAuthRequired: false,
-  handler: async ({ authService }) => {
-    const user = authService.getCurrentUser();
+  requestSchema: {
+    accessToken: schema.string().min(1)
+  },
+  handler: async ({ tokenService, userRepository }, { accessToken }) => {
+    const payload = await tokenService.verifyAccessToken(accessToken);
 
-    if (!user) return createResult.error(new SessionNotFoundError());
+    if (!payload) return createResult.error(new InvalidCredentialsError());
 
-    return createResult.ok(user);
+    const user = await userRepository.findOne({ where: { id: payload.userId } });
+
+    if (!user) return createResult.error(new UserNotFoundError());
+
+    return createResult.ok<GetCurrentUserResponse>({
+      id: user.id,
+      username: user.username,
+      email: user.email,
+    });
   }
 });
