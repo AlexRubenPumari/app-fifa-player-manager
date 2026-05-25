@@ -5,6 +5,8 @@ services:
     ports:
       - "${HOST_DB_PORT}:3306"
     env_file: .env
+    volumes:
+      - ./apps/api/db/seeds:/docker-entrypoint-initdb.d
   web:
     image: fifa-player-manager-web:dev
     build:
