@@ -1,4 +1,4 @@
-import { DomainError } from "./domain.error";
+import { DomainError } from "./domain.error.js";
 
 export class InvalidCredentialsError extends DomainError {
   readonly type = "INVALID_CREDENTIALS";
