@@ -1,0 +1,18 @@
+{
+  "name": "fifa-player-manager",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "domain"
+  ],
+  "scripts": {
+    "dev": "docker compose up -d",
+    "db:seed": "dotenv -e .env -- sh -c 'docker compose exec -T db mysql -uroot -p$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE < ./apps/api/db/seeds/fifa-male-players.sql'",
+    "db:migrate": "docker compose exec api npx prisma migrate dev",
+    "db:shell": "dotenv -e .env -- docker compose exec db mysql -uroot -p",
+    "db:reset": "docker compose exec api npx prisma migrate reset --force"
+  },
+  "devDependencies": {
+    "dotenv-cli": "^11.0.0"
+  }
+}
