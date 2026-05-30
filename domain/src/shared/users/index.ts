@@ -1,1 +1,1 @@
-export * from "./safe-user.shared";
+export * from "./safe-user.shared.js";

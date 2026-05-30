@@ -1,4 +1,4 @@
-import { PlayerPosition, playerPositions } from "./index";
+import { type PlayerPosition, playerPositions } from "./index.js";
 
 export const clubPositions = [
   ...playerPositions,

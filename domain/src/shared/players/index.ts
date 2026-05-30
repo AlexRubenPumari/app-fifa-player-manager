@@ -1,2 +1,2 @@
-export * from "./player-position.shared";
-export * from "./club-position.shared";
+export * from "./player-position.shared.js";
+export * from "./club-position.shared.js";

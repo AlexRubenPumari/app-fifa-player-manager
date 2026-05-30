@@ -1,4 +1,3 @@
-export * from "./validate-request.shared";
-export * from "./create-use-case.shared";
-export * from "./create-result.shared";
-export * from "./schema.shared";
+export * from "./create-use-case.shared.js";
+export * from "./create-result.shared.js";
+export * from "./schema/index.js";

@@ -1,4 +1,5 @@
-import { orderDirections, schema } from "../..";
+import { orderDirections } from "../../index.js";
+import { schema } from "../utils/schema/index.js";
 
 const orderDirectionSchema = schema.enum(orderDirections);
 
