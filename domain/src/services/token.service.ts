@@ -1,4 +1,4 @@
-import { AccessTokenPayload } from "../shared";
+import type { AccessTokenPayload } from "../shared/index.js";
 
 export interface TokenService {
   signAccessToken(
