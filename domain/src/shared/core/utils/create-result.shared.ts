@@ -1,5 +1,5 @@
-import { DomainError } from "../../../errors";
-import { Failure, Success } from "../index";
+import type { Failure, Success } from "../index.js";
+import { DomainError } from "../../../errors/index.js";
 
 interface CreateResult {
   ok(): Success<void>;

@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
-import { createResult } from "./create-result.shared";
-import { DomainError } from "../../errors";
+import { createResult } from "./create-result.shared.js";
+import { DomainError } from "../../../errors/index.js";
 
 class TestError extends DomainError {
   readonly type = "DOMAIN";
@@ -19,7 +19,7 @@ describe("create-result", () => {
       });
     });
 
-    test("should accept primitive values", () => {
+    test("should allow primitive values", () => {
       const response = createResult.ok("hello");
 
       expect(response.ok).toBe(true);

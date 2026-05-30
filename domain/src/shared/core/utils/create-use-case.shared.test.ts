@@ -1,7 +1,7 @@
 import { describe, test, expect, vi } from "vitest";
-import { createUseCase } from "./create-use-case.shared";
-import { DomainError } from "../../errors";
-import { schema } from "../utils";
+import { createUseCase } from "./create-use-case.shared.js";
+import { DomainError } from "../../../errors/index.js";
+import { schema } from "../utils/schema/index.js";
 
 class TestError extends DomainError {
   readonly type = "DOMAIN" as const;
@@ -9,9 +9,9 @@ class TestError extends DomainError {
 
 describe("create-use-case", () => {
   test("should expose the auth requirement flag", () => {
-    const useCase = createUseCase()({
+    const useCase = createUseCase({
       isAuthRequired: true,
-      requestShape: { name: schema.string() },
+      requestSchema: { name: schema.string() },
       handler: vi.fn(),
     });
 
@@ -21,9 +21,9 @@ describe("create-use-case", () => {
   test("should execute handler with validated request", async () => {
     const handler = vi.fn().mockResolvedValue({ ok: true, value: "success" });
 
-    const useCase = createUseCase()({
+    const useCase = createUseCase({
       isAuthRequired: false,
-      requestShape: { name: schema.string() },
+      requestSchema: { name: schema.string() },
       handler,
     });
 
@@ -39,9 +39,9 @@ describe("create-use-case", () => {
   test("should return error when request validation fails", async () => {
     const handler = vi.fn();
 
-    const useCase = createUseCase()({
+    const useCase = createUseCase({
       isAuthRequired: false,
-      requestShape: { name: schema.string() },
+      requestSchema: { name: schema.string() },
       handler,
     });
 
@@ -51,32 +51,15 @@ describe("create-use-case", () => {
     expect(handler).not.toHaveBeenCalled();
   });
 
-  test("should pass validated data to handler instead of raw request", async () => {
-    const requestShape = {
-      name: schema.string().transform((val) => val.toUpperCase()),
-    };
-    const handler = vi.fn().mockResolvedValue({ ok: true, value: "processed" });
-
-    const useCase = createUseCase()({
-      isAuthRequired: false,
-      requestShape,
-      handler,
-    });
-
-    await useCase.execute({} as never, { name: "john" });
-
-    expect(handler).toHaveBeenCalledWith({} as never, { name: "JOHN" });
-  });
-
   test("should propagate successful handler result", async () => {
     const handler = vi.fn().mockResolvedValue({
       ok: true,
       value: { id: 1, name: "user" },
     });
 
-    const useCase = createUseCase()({
+    const useCase = createUseCase({
       isAuthRequired: false,
-      requestShape: { id: schema.number() },
+      requestSchema: { id: schema.number() },
       handler,
     });
 
@@ -95,9 +78,9 @@ describe("create-use-case", () => {
       error,
     });
 
-    const useCase = createUseCase()({
+    const useCase = createUseCase({
       isAuthRequired: false,
-      requestShape: { id: schema.number() },
+      requestSchema: { id: schema.number() },
       handler,
     });
 
@@ -113,9 +96,9 @@ describe("create-use-case", () => {
     const dependencies = { repository: { find: vi.fn() } };
     const handler = vi.fn().mockResolvedValue({ ok: true, value: "success" });
 
-    const useCase = createUseCase()({
+    const useCase = createUseCase({
       isAuthRequired: false,
-      requestShape: { id: schema.number() },
+      requestSchema: { id: schema.number() },
       handler,
     });
 

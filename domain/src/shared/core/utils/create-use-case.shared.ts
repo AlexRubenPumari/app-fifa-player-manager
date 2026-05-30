@@ -1,15 +1,6 @@
-import { Result, UseCase, UseCaseError } from "../../index";
-import { DomainError } from "../../../errors";
-import { validateRequest } from "../utils";
-import { Schema } from "../types";
-
-interface UseCaseOptions<TDependencies, TRequest, TResponse, TError extends DomainError> {
-  isAuthRequired: boolean;
-  requestSchema?: Schema<TRequest>;
-  handler: (
-    dependencies: TDependencies, request: TRequest
-  ) => Promise<Result<TResponse, TError>>;
-}
+import type { Result, UseCase, UseCaseError, UseCaseOptions } from "../types/index.js";
+import { DomainError } from "../../../errors/index.js";
+import { validateRequest } from "./schema/index.js";
 
 export function createUseCase<
   TDependencies,
@@ -28,7 +19,7 @@ export function createUseCase<
 
       if (!validationResult.ok) return validationResult;
 
-      return options.handler(dependencies, validationResult.value);
+      return options.handler(dependencies, validationResult.value); //todo cambiar el tipo result
     }
   }
 }
