@@ -1,2 +1,2 @@
-export * from "./player.entity";
-export * from "./user.entity";
+export * from "./player.entity.js";
+export * from "./user.entity.js";

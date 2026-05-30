@@ -1,4 +1,4 @@
-import { Email, Entity } from "../shared";
+import type { Email, Entity } from "../shared/index.js";
 
 export interface User extends Entity {
   username: string;
