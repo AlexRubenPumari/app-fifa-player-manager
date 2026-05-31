@@ -1,8 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client"
   output   = "../generated/prisma"
@@ -10,4 +5,71 @@ generator client {
 
 datasource db {
   provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model players {
+  id                         Int     @id @default(autoincrement())
+  fifa_version               String  @db.VarChar(255)
+  fifa_update                String  @db.VarChar(255)
+  player_face_url            String  @db.VarChar(255)
+  long_name                  String  @db.VarChar(255)
+  player_positions           String  @db.VarChar(255)
+  club_name                  String? @db.VarChar(255)
+  nationality_name           String? @db.VarChar(255)
+  overall                    Int
+  potential                  Int
+  value_eur                  Int?
+  wage_eur                   Int?
+  age                        Int
+  height_cm                  Int?
+  weight_kg                  Int?
+  preferred_foot             String? @db.VarChar(255)
+  weak_foot                  Int?
+  skill_moves                Int?
+  international_reputation   Int?
+  work_rate                  String? @db.VarChar(255)
+  body_type                  String? @db.VarChar(255)
+  pace                       Int?
+  shooting                   Int?
+  passing                    Int?
+  dribbling                  Int?
+  defending                  Int?
+  physic                     Int?
+  attacking_crossing         Int?
+  attacking_finishing        Int?
+  attacking_heading_accuracy Int?
+  attacking_short_passing    Int?
+  attacking_volleys          Int?
+  skill_dribbling            Int?
+  skill_curve                Int?
+  skill_fk_accuracy          Int?
+  skill_long_passing         Int?
+  skill_ball_control         Int?
+  movement_acceleration      Int?
+  movement_sprint_speed      Int?
+  movement_agility           Int?
+  movement_reactions         Int?
+  movement_balance           Int?
+  power_shot_power           Int?
+  power_jumping              Int?
+  power_stamina              Int?
+  power_strength             Int?
+  power_long_shots           Int?
+  mentality_aggression       Int?
+  mentality_interceptions    Int?
+  mentality_positioning      Int?
+  mentality_vision           Int?
+  mentality_penalties        Int?
+  mentality_composure        Int?
+  defending_marking          Int?
+  defending_standing_tackle  Int?
+  defending_sliding_tackle   Int?
+  goalkeeping_diving         Int?
+  goalkeeping_handling       Int?
+  goalkeeping_kicking        Int?
+  goalkeeping_positioning    Int?
+  goalkeeping_reflexes       Int?
+  goalkeeping_speed          Int?
+  player_traits              String? @db.VarChar(255)
 }
