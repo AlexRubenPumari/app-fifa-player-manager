@@ -1,8 +1,8 @@
-import { createResult, createUseCase, schema } from "../../shared/core/utils";
-import { SafeUser } from "../../shared/users";
-import { InvalidCredentialsError, UserNotFoundError } from "../../errors";
-import { TokenService } from "../../services";
-import { UserRepository } from "../../repositories";
+import type { SafeUser } from "../../shared/users/index.js";
+import type { TokenService } from "../../services/index.js";
+import type { UserRepository } from "../../repositories/index.js";
+import { createResult, createUseCase, schema } from "../../shared/core/utils/index.js";
+import { InvalidCredentialsError, UserNotFoundError } from "../../errors/index.js";
 
 interface GetCurrentUserDependencies {
   tokenService: TokenService;

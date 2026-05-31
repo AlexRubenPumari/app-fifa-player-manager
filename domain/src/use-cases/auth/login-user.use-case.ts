@@ -1,8 +1,8 @@
-import { createResult, createUseCase, Email, schema } from "../../shared/core";
-import { AuthSession } from "../../shared/auth";
-import { CryptoService, TokenService } from "../../services";
-import { InvalidCredentialsError, UserNotFoundError } from "../../errors";
-import { UserRepository } from "../../repositories";
+import type { AuthSession, Email } from "../../shared/index.js";
+import type { CryptoService, TokenService } from "../../services/index.js";
+import type { UserRepository } from "../../repositories/index.js";
+import { createResult, createUseCase, schema } from "../../shared/core/index.js";
+import { InvalidCredentialsError, UserNotFoundError } from "../../errors/index.js";
 
 interface LoginUserDependencies {
   userRepository: UserRepository
@@ -25,8 +25,8 @@ export const loginUser = createUseCase<
 >({
   isAuthRequired: false,
   requestSchema: {
-    email: schema.email("invalid email format"),
-    password: schema.string().min(1, "password is required"),
+    email: schema.string().email(),
+    password: schema.string().min(1),
   },
   handler: async ({ tokenService, cryptoService, userRepository }, { email, password }) => {
     const user = await userRepository.findOne({ where: { email } });

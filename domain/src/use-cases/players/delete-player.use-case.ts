@@ -1,6 +1,6 @@
-import { createResult, createUseCase, schema } from "../../shared";
-import { PlayerRepository } from "../../repositories";
-import { PlayerNotFoundError } from "../../errors";
+import type { PlayerRepository } from "../../repositories/index.js";
+import { createResult, createUseCase, schema } from "../../shared/index.js";
+import { PlayerNotFoundError } from "../../errors/index.js";
 
 interface DeletePlayerDependencies {
   playerRepository: PlayerRepository;
@@ -17,9 +17,9 @@ export const deletePlayerUseCase = createUseCase<
   PlayerNotFoundError
 >({
   isAuthRequired: true,
-  requestSchema: { id: schema.number().int().positive("id must be a positive integer") },
+  requestSchema: { id: schema.number().int().min(1) },
   handler: async ({ playerRepository }, { id }) => {
-    const existingPlayer = await playerRepository.findOne({ id });
+    const existingPlayer = await playerRepository.findOne({ where: { id } });
 
     if (!existingPlayer) return createResult.error(new PlayerNotFoundError());
 

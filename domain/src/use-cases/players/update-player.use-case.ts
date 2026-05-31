@@ -1,8 +1,9 @@
-import { createResult, createUseCase, schema } from "../../shared/core";
-import { playerPositions, clubPositions, ClubPosition, PlayerPosition } from "../../shared/players";
-import { PlayerRepository } from "../../repositories";
-import { PlayerNotFoundError } from "../../errors";
-import { Player } from "../../entities";
+import type { Optional } from "../../shared/index.js";
+import type { PlayerRepository } from "../../repositories/index.js";
+import type { Player } from "../../entities/index.js";
+import { createResult, createUseCase, schema } from "../../shared/core/index.js";
+import { playerPositions, clubPositions } from "../../shared/players/index.js";
+import { PlayerNotFoundError } from "../../errors/index.js";
 
 interface UpdatePlayerDependencies {
   playerRepository: PlayerRepository;
@@ -10,7 +11,7 @@ interface UpdatePlayerDependencies {
 
 interface UpdatePlayerRequest {
   id: number;
-  data: Partial<Omit<Player, "id">>;
+  data: Optional<Omit<Player, "id">>;
 }
 
 export const updatePlayer = createUseCase<
@@ -21,18 +22,18 @@ export const updatePlayer = createUseCase<
 >({
   isAuthRequired: true,
   requestSchema: {
-    id: schema.number().int().positive("id must be a positive integer"),
+    id: schema.number().int().min(1),
     data: schema.object({
-      longName: schema.string().min(1, "long name is required"),
-      clubName: schema.string().min(1, "club name is required"),
-      clubPosition: schema.enum(clubPositions),
-      playerPositions: schema.array(schema.enum(playerPositions)).min(1, "player positions must contain at least one position"),
-      overall: schema.number().int().min(0, "overall must be between 0 and 100").max(100, "overall must be between 0 and 100"),
-      nationality: schema.string().min(1, "nationality is required"),
-    }).partial()
+      longName: schema.string().min(1).optional(),
+      clubName: schema.string().min(1).optional(),
+      clubPosition: schema.enum(clubPositions).optional(),
+      playerPositions: schema.array(schema.enum(playerPositions)).min(1).optional(),
+      overall: schema.number().int().min(0).max(100).optional(),
+      nationality: schema.string().min(1).optional(),
+    }).nonEmpty()
   },
   handler: async ({ playerRepository }, { id, data }) => {
-    const existingPlayer = await playerRepository.findOne({ id });
+    const existingPlayer = await playerRepository.findOne({ where: { id } });
 
     if (!existingPlayer) return createResult.error(new PlayerNotFoundError());
 

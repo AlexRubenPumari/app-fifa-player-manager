@@ -1,8 +1,8 @@
-import { createResult, createUseCase, Email, schema } from "../../shared/core";
-import { AuthSession } from "../../shared/auth";
-import { UserRepository } from "../../repositories";
-import { CryptoService, TokenService } from "../../services";
-import { UserAlreadyExistsError } from "../../errors";
+import type { Email, AuthSession } from "../../shared/index.js";
+import type { UserRepository } from "../../repositories/index.js";
+import type { CryptoService, TokenService } from "../../services/index.js";
+import { createResult, createUseCase, schema } from "../../shared/core/index.js";
+import { UserAlreadyExistsError } from "../../errors/index.js";
 
 interface RegisterUserDependencies {
   userRepository: UserRepository;
@@ -26,9 +26,9 @@ export const registerUser = createUseCase<
 >({
   isAuthRequired: false,
   requestSchema: {
-    email: schema.email("invalid email format"),
-    password: schema.string().min(8, "password must be at least 8 characters"),
-    username: schema.string().min(1, "username is required"),
+    email: schema.string().email(),
+    password: schema.string().min(8),
+    username: schema.string().min(1),
   },
   handler: async ({ userRepository, cryptoService, tokenService }, { email, password, username }) => {
     const existingUser = await userRepository.findOne({ where: { email } });

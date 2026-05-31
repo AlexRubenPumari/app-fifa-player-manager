@@ -1,12 +1,8 @@
-import { createResult, createUseCase, schema } from "../../shared/core";
-import {
-  ClubPosition,
-  PlayerPosition,
-  playerPositions,
-  clubPositions,
-} from "../../shared/players";
-import { Player } from "../../entities";
-import { PlayerRepository } from "../../repositories";
+import type { ClubPosition, PlayerPosition } from "../../shared/players/index.js";
+import type { Player } from "../../entities/index.js";
+import type { PlayerRepository } from "../../repositories/index.js";
+import { createResult, createUseCase, schema } from "../../shared/core/index.js";
+import { playerPositions, clubPositions } from "../../shared/players/index.js";
 
 interface CreatePlayerDependencies {
   playerRepository: PlayerRepository;
@@ -29,12 +25,12 @@ export const createPlayerUseCase = createUseCase<
 >({
   isAuthRequired: true,
   requestSchema: {
-    longName: schema.string().min(1, "long name is required"),
-    clubName: schema.string().min(1, "club name is required"),
+    longName: schema.string().min(1),
+    clubName: schema.string().min(1),
     clubPosition: schema.enum(clubPositions),
-    playerPositions: schema.array(schema.enum(playerPositions)).min(1, "player positions must contain at least one position"),
-    overall: schema.number().int().min(0, "overall must be between 0 and 100").max(100, "overall must be between 0 and 100"),
-    nationality: schema.string().min(1, "nationality is required"),
+    playerPositions: schema.array(schema.enum(playerPositions)).min(1),
+    overall: schema.number().int().min(0),
+    nationality: schema.string().min(1),
   },
   handler: async ({ playerRepository }, data) => {
     const player = await playerRepository.save(data);

@@ -1,8 +1,9 @@
-import { createResult, createUseCase, FindManyDTO, schema } from "../../shared/core";
-import { whereSchema, orderBySchema } from "../../shared/core/schemas";
-import { PlayerRepository } from "../../repositories";
-import { ExportService } from "../../services";
-import { Player } from "../../entities";
+import type { ExportService } from "../../services/index.js";
+import type { Player } from "../../entities/index.js";
+import type { FindManyDTO } from "../../shared/core/index.js";
+import type { PlayerRepository } from "../../repositories/index.js";
+import { createResult, createUseCase, schema } from "../../shared/core/index.js";
+import { whereSchema, orderBySchema } from "../../shared/core/schemas/index.js";
 
 interface ExportPlayersDependencies {
   playerRepository: PlayerRepository;
@@ -22,8 +23,8 @@ export const exportPlayers = createUseCase<
   isAuthRequired: true,
   requestSchema: {
     where: whereSchema.optional(),
-    take: schema.number().int().positive().max(100),
-    skip: schema.number().int().nonnegative(),
+    take: schema.number().int().min(1).max(100),
+    skip: schema.number().int().min(0),
     orderBy: orderBySchema.optional(),
   },
   handler: async ({ playerRepository, exportService }, request) => {

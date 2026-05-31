@@ -1,7 +1,7 @@
-import { PlayerNotFoundError } from "../../errors";
-import { PlayerRepository } from "../../repositories";
-import { Player } from "../../entities";
-import { createUseCase, createResult, schema } from "../../shared";
+import type { PlayerRepository } from "../../repositories/index.js";
+import type { Player } from "../../entities/index.js";
+import { PlayerNotFoundError } from "../../errors/index.js";
+import { createUseCase, createResult, schema } from "../../shared/index.js";
 
 interface GetPlayerByIdDependencies {
   playerRepository: PlayerRepository;
@@ -22,7 +22,7 @@ export const getPlayerByIdUseCase = createUseCase<
     id: schema.number(),
   },
   handler: async (dependencies, request) => {
-    const player = await dependencies.playerRepository.findOne({ id: request.id });
+    const player = await dependencies.playerRepository.findOne({ where: { id: request.id } });
 
     if (!player) return createResult.error(new PlayerNotFoundError());
 
