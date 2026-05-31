@@ -7,8 +7,9 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "npx tsc",
-    "test": "vitest ./src --run"
+    "build": "tsc -p tsconfig.build.json",
+    "test": "vitest ./src --run",
+    "typecheck": "tsc --noEmit -p tsconfig.typecheck.json"
   },
   "devDependencies": {
     "typescript": "^6.0.3",
