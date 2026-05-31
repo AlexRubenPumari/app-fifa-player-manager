@@ -1,17 +1,10 @@
-import { Entity, FilterCondition, OrderBy } from "../index";
-
-export type WhereClause<TEntity extends Entity> = {
-  [Key in keyof TEntity]?: TEntity[Key] | FilterCondition<TEntity[Key]>;
-} & {
-  AND?: WhereClause<TEntity> | WhereClause<TEntity>[];
-  OR?: WhereClause<TEntity>[];
-};
+import type { Entity, Optional, OrderBy, WhereClause } from "../index.js";//todo: order-by-clause
 
 export type FindManyDTO<TEntity extends Entity> = {
-  where?: WhereClause<TEntity>;
+  where?: WhereClause<TEntity> | undefined;
   take: number;
   skip: number;
-  orderBy?: OrderBy<TEntity> | OrderBy<TEntity>[];
+  orderBy?: OrderBy<TEntity> | OrderBy<TEntity>[] | undefined;
 };
 
 export interface FindOneDTO<TEntity extends Entity> {
@@ -29,5 +22,5 @@ export type SaveDTO<TEntity extends Entity> = Omit<TEntity, "id">;
 
 export interface UpdateDTO<TEntity extends Entity> {
   id: TEntity["id"];
-  data: Partial<Omit<TEntity, "id">>;
+  data: Optional<Omit<TEntity, "id">>;
 }
