@@ -1,2 +1,2 @@
-export * from "./player.repository";
-export * from "./user.repository"
+export * from "./player.repository.js";
+export * from "./user.repository.js"

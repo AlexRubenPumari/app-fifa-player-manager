@@ -1,4 +1,4 @@
-import { SafeUser } from "../users";
+import type { SafeUser } from "../users/index.js";
 
 export interface AuthSession {
   accessToken: string;

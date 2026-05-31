@@ -1,3 +1,2 @@
-export * from "./where-schema.shared";
-export * from "./filter-condition-schema.shared";
-export * from "./order-by-schema.shared";
+export * from "./where-schema.shared.js";
+export * from "./order-by-schema.shared.js";

@@ -1,4 +1,4 @@
-import { Email } from "..";
+import type { Email } from "../index.js";
 
 export interface AccessTokenPayload {
   userId: number;
