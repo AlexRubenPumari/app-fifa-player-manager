@@ -15,7 +15,7 @@ type LoginUserResponse = AuthSession;
 type LoginUserRequest = {
   email: Email;
   password: string;
-};
+};//todo: factories y tests
 
 export const loginUser = createUseCase<
   LoginUserDependencies,
