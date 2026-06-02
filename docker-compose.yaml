@@ -26,8 +26,8 @@ services:
   api:
     image: fifa-player-manager-api:dev
     build:
-      context: ./apps/api
-      dockerfile: api.dockerfile
+      context: .
+      dockerfile: ./apps/api/api.dockerfile
     container_name: fifa-player-manager-api
     ports:
       - "${HOST_API_PORT}:3000"
@@ -38,5 +38,5 @@ services:
       db:
         condition: service_healthy
     volumes:
-      - ./apps/api:/app
-      - /app/node_modules
+      - ./apps/api:/app/apps/api 
+      - /app/apps/api/node_modules

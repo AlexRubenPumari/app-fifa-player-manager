@@ -1,12 +1,14 @@
 FROM node:22-alpine
 
-WORKDIR /app
+WORKDIR /app/apps/api
 
-COPY package*.json ./
+COPY domain /app/domain
+
+COPY apps/api/package*.json ./
 
 RUN npm install
 
-COPY . .
+COPY apps/api .
 
 EXPOSE 3000
 
