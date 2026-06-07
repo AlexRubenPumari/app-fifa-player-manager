@@ -1,23 +1,25 @@
 # FIFA Player Manager
 
-Monorepo application composed of:
+Aplicación monorepo compuesta por:
 
-- `apps/web` → Frontend
-- `apps/api` → Backend API
-- `domain` → Shared domain logic
-
-## Requirements
-
-- Docker
-- Docker Compose
-- Node.js >= 22
-- npm
+* `apps/web` → Frontend
+* `apps/api` → Backend API
+* `domain` → Lógica de dominio compartida
 
 ---
 
-# Installation
+## Requisitos
 
-Install workspace dependencies:
+* Docker
+* Docker Compose
+* Node.js >= 22
+* npm
+
+---
+
+## Instalación
+
+Instalar dependencias del workspace (ejecutar en la raíz del proyecto):
 
 ```bash
 npm install
@@ -25,9 +27,11 @@ npm install
 
 ---
 
-# Environment Variables
+## Variables de Entorno
 
-Create a `.env` file in the project root: (ver .env.example)
+Crear un archivo `.env` en la raíz del proyecto (ver `.env.example`).
+
+⚠️ **Todos los campos son obligatorios.**
 
 ```env
 # HOST PORTS
@@ -42,23 +46,25 @@ MYSQL_ROOT_PASSWORD=secret123
 
 ---
 
-# Development Workflow
+## Flujo de Desarrollo
 
-## 1. Start containers
+⚠️ **Todos los comandos deben ejecutarse desde la raíz del proyecto.**
+
+### 1. Levantar contenedores
 
 ```bash
 npm run dev
 ```
 
-This starts:
+Esto inicia:
 
-- MySQL database
-- API container
-- Web container
+* Base de datos MySQL
+* Contenedor de la API
+* Contenedor del frontend
 
 ---
 
-## 2. Run database migrations
+### 2. Ejecutar migraciones de base de datos
 
 ```bash
 npm run db:migrate
@@ -66,7 +72,7 @@ npm run db:migrate
 
 ---
 
-## 3. Seed database (optional)
+### 3. Seed de la base de datos (opcional)
 
 ```bash
 npm run db:seed
@@ -74,9 +80,20 @@ npm run db:seed
 
 ---
 
-# Database Utilities
+## Credenciales de acceso
 
-## Open MySQL shell
+Para iniciar sesión en la aplicación:
+
+```txt
+username: admin
+password: 1234
+```
+
+---
+
+## Utilidades de Base de Datos
+
+### Abrir consola de MySQL
 
 ```bash
 npm run db:shell
@@ -84,20 +101,32 @@ npm run db:shell
 
 ---
 
-## Reset database
+### Resetear base de datos
 
 ```bash
 npm run db:reset
 ```
 
-This command:
+Este comando:
 
-- drops the database schema
-- reapplies migrations
+* Elimina el esquema de la base de datos
+* Vuelve a aplicar las migraciones
 
 ---
 
-# Project Structure
+## Colección de Postman
+
+Podés encontrar la colección de endpoints en:
+
+```txt
+apps/api/api.postman.json
+```
+
+Importala en Postman para probar la API fácilmente.
+
+---
+
+## Estructura del Proyecto
 
 ```txt
 .
