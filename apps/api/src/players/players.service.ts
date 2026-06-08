@@ -3,7 +3,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { PlayerRepository, Player } from '@fifa-player-manager/domain';
 
 @Injectable()
-export class PrismaPlayerRepository implements PlayerRepository { //resolver nombre x repository
+export class PrismaPlayerRepository { // implements PlayerRepository { //resolver nombre x repository
   constructor(private prisma: PrismaService) {}
 
   async save(createPlayerDto) {
@@ -11,10 +11,20 @@ export class PrismaPlayerRepository implements PlayerRepository { //resolver nom
     return 'This action adds a new player' as unknown as Player;
   }
 
-  async findMany({ skip }: { skip: number }) { //todo : arreglar o mejorar + esto puede ser undefined decidir quien se hace cargo el caso de uso o dar un result error o buscar convaores por defecto??
-    const x = await this.prisma.players.findMany({ take: 4, skip });
+  async findMany({ skip, take, where }: { skip: number, take: number, where?: { name: string } | undefined }) { //todo : arreglar o mejorar + esto puede ser undefined decidir quien se hace cargo el caso de uso o dar un result error o buscar convaores por defecto??
+    let whereClause = {};
 
-    const players = x.map((x) => ({
+    if (where?.name) {
+      whereClause = {
+        long_name: {
+          contains: where.name,
+        },
+      };
+    }
+console.log(skip);
+    const x = await this.prisma.players.findMany({ take, skip, where: whereClause });
+
+    const players = x.map((x) => ({ //todo: resolver co prisma se puede
       id: x.id,
       longName: x.long_name,
       clubName: x.club_name || "no-club",
