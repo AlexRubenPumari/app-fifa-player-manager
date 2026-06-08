@@ -1,0 +1,17 @@
+<div class="container">
+    <h2 class="form-title">Iniciar sesión</h2>
+    <p class="form-description">Por favor, introduce tus credenciales para iniciar sesión.</p>
+    <form class="form" method="dialog" [formGroup]="loginForm">
+        <app-input
+            formControlName="username"
+            label="Usuario"
+            placeholder="Nombre de usuario">
+        </app-input>
+        <app-input
+            formControlName="password"
+            label="Contraseña"
+            placeholder="Contraseña">
+        </app-input>
+        <app-button (clicked)="login()" [value]="'Iniciar sesión'"></app-button>
+    </form>
+</div>

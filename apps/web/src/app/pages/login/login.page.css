@@ -1,0 +1,21 @@
+.container {
+    background-color: bisque;
+    padding: 2em;
+    border-radius: 1em;
+}
+
+.form-title, .form-description {
+    margin-bottom: 0.5rem;
+}
+
+.form-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
