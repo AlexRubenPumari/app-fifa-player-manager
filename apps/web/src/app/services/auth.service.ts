@@ -4,7 +4,7 @@ import { Observable, tap } from "rxjs";
 
 @Injectable({ providedIn: "root" }) //todo: test
 export class AuthService {
-  private apiUrl = "http://localhost:3000/auth";
+  private apiUrl = "http://localhost:3000/auth"; //todo
 
   constructor(private http: HttpClient) {} //todo: usar esto o inject
 

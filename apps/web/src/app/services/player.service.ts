@@ -6,10 +6,11 @@ import { Observable } from 'rxjs';
 export class PlayerService {
   private http = inject(HttpClient); //todo: probar sacandolo del appconfig
 
-  private apiUrl = 'https://api:3000/players';
+  private apiUrl = "http://localhost:3000/players"; //todo: centralizar y parametrizar
 
   getPlayers(filters: any, page: number): Observable<any> { //todo: 1) pq observable y pq el any? 2) como getPLayers sabe q le van a venir filters y page en ese orden? de donde lo recibe? de la url?
-    let params = new HttpParams().set('page', page.toString()); //todo: q hace esto? y pq page? y set?
+    let params = new HttpParams()
+      .set('page', page.toString());
     
     return this.http.get<any>(this.apiUrl, { params }); //todo: sacar el any, como?
   }
