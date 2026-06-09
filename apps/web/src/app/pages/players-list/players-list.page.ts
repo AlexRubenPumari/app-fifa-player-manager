@@ -3,7 +3,7 @@ import { PlayerService } from '../../services/player.service';//todo
 import { CommonModule } from '@angular/common';
 import { map, Observable, switchMap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-
+//todo: dos observables, combinarlos en uno solo?
 @Component({
   selector: 'app-players-list',
   imports: [CommonModule],
@@ -17,16 +17,18 @@ export class PlayersListPage {
     private playerService: PlayerService
   ) {}
 
+  page$!: Observable<number>;
   players$!: Observable<any>;
 
   ngOnInit(): void {
-    page$ = this.route.queryParams.pipe(
-      map(params => +params['page'] || 1)
+    this.page$ = this.route.queryParams.pipe(
+      map(params => Math.max(1, +params['page'] || 1))
     );
 
-    this.players$ = this.route.queryParams.pipe(
-      map(params => +params['page'] || 1),
-      switchMap(page => this.playerService.getPlayers({}, page)),
+    this.players$ = this.page$.pipe(
+      switchMap(page =>
+        this.playerService.getPlayers({}, page)
+      ),
       map(res => res.data)
     );
   }
@@ -39,11 +41,11 @@ export class PlayersListPage {
     });
   }
 
-  goToNextPage() {
-    this.goToPage(this.currentPage + 1)
+  nextPage(page: number) {
+    this.goToPage(page + 1);
   }
 
-  goToPreviousPage() {
-    this.goToPage(this.currentPage + -)
+  prevPage(page: number) {
+    this.goToPage(Math.max(1, page - 1));
   }
 }

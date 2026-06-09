@@ -35,7 +35,7 @@ export class LoginPage {
 
     this.authService.login(loginFormValue).subscribe({
       next: () => {
-        this.router.navigate(['/players']);
+        this.router.navigate(['/players'], { queryParams: { page: 1 } });
       },
       error: (err) => {
         console.error('login error', err);

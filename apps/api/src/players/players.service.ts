@@ -32,7 +32,8 @@ console.log(skip);
       nationality: x.nationality_name || "no-pais",
       overall: x.overall,
       clubPosition: "CB",
-    } satisfies Player))
+      imgUrl: x.player_face_url,
+    } as unknown as Player))
 
     return {
       data: players,

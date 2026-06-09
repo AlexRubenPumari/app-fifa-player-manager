@@ -1,1 +1,67 @@
-<p>players list works!</p>
+<!-- <h2>Players</h2>
+<button></button>
+<button (click)="prevPage(1)">atras</button>
+<span>Página: {{ page$ | async }}</span>
+<button (click)="nextPage(2)">sig</button>
+
+
+<ul class="flex items-center justify-center flex-wrap gap-4" *ngIf="players$ | async as players; else loading">
+  
+  <li class="player-card" *ngFor="let player of players">
+    <img [src]="player.imgUrl" referrerpolicy="no-referrer" alt="hola mundo" width="100" height="100">
+    <strong>{{ player.longName }}</strong><br />
+
+    <small>
+      {{ player.clubName }} - {{ player.nationality }}
+    </small><br />
+
+    <span>
+      Overall: {{ player.overall }}
+    </span><br />
+
+    <span>
+      Positions: {{ player.playerPositions.join(', ') }}
+    </span>
+
+  </li>
+
+</ul> //todo
+
+-->
+<ng-template #loading>
+  <p>Cargando jugadores...</p>
+</ng-template>
+
+<ng-container *ngIf="page$ | async as page">
+
+  <ul class="flex items-center justify-center flex-wrap gap-4" *ngIf="players$ | async as players; else loading">
+    <li class="player-card" *ngFor="let player of players">
+      <img [src]="player.imgUrl" referrerpolicy="no-referrer" alt="hola mundo" width="100" height="100">
+      <strong>{{ player.longName }}</strong><br />
+
+      <small>
+        {{ player.clubName }} - {{ player.nationality }}
+      </small><br />
+
+      <span>
+        Overall: {{ player.overall }}
+      </span><br />
+
+      <span>
+        Positions: {{ player.playerPositions.join(', ') }}
+      </span>
+
+    </li>
+  </ul>
+
+  <button (click)="prevPage(page)">
+    Previous
+  </button>
+
+  <span>{{ page }}</span>
+
+  <button (click)="nextPage(page)">
+    Next
+  </button>
+
+</ng-container>
